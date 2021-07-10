@@ -7,7 +7,7 @@ ruby '2.7.0'
 gem 'devise_token_auth'
 
 # JSON serializer
-gem 'active_model_serializer'
+gem 'active_model_serializers'
 
 # Environment variables
 gem 'dotenv'

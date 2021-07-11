@@ -16,9 +16,10 @@ module Api
             def create 
                 @character = Character.new(parameters)
                 if @character.save
-                    render json: @character, status: :created
+                    render json: @character, status: :created,
+                           serializer: CharacterSerializers::StandardCharacterSerializer
                 else 
-                    render json: {error: "Can't create the specified character"}, status: :unprocessable_entity
+                    render json: @character.errors , status: :unprocessable_entity
                 end
 
             end
@@ -29,9 +30,10 @@ module Api
 
             def update
                 if @character.update(parameters)
-                    render json: @character
+                    render json: @character,
+                    serializer: CharacterSerializers::StandardCharacterSerializer
                 else
-                    render json: {error: "Can't update the specified character"}, status: :unprocessable_entity
+                    render json: @character.errors , status: :unprocessable_entity
                 end
             end
 

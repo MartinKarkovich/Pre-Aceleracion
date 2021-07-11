@@ -7,7 +7,8 @@ movie = Movie.create!(
     :genre => genre,
     :title => 'Spiderman',
     :date_of_creation => Date.new(2000,4,20),
-    :rating => 4.5
+    :rating => 4.5,
+    :image => 'image'
 )
 
 Character.create!(

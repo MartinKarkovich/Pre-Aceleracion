@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2021_07_10_203717) do
 
   create_table "movies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "genre_id"
+    t.string "image"
     t.string "title"
     t.date "date_of_creation"
     t.decimal "rating", precision: 10

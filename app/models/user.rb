@@ -7,7 +7,5 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   # Validations
-  validates :password,:first_name,:last_name,:email,presence:true
-  #validates :password, length: { in: 8..16 }
-
+  validates :first_name,:last_name,:email,presence:true
 end

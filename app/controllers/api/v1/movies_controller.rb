@@ -4,7 +4,7 @@ module Api
             before_action :authenticate_user!
             before_action :set_movie, only: [:show,:destroy,:update]
             def index
-                @movies = Movie.all
+                @movies = fetch_movies
                 render json: @movies,
                        each_serializer: MovieSerializers::IndexMovieSerializer
             end
@@ -39,13 +39,35 @@ module Api
             end
 
             private
+
+            def fetch_movies
+                movies = Movie.all
+                movies = movies.for_genre_id(genre_id) if genre_id
+                movies = movies.for_title(title) if title
+                movies = movies.for_order_by_date_of_creation(order_param) if order_param
+                movies
+            end
             
+            ## Filtros
+            def genre_id
+                params[:genre_id]
+            end
+            
+            def title
+                params[:title]
+            end
+
+            def order_param
+                params[:order]
+            end            
+            ####################
+
             def set_movie
                 @movie = Movie.find(params[:id])
             end
 
             def parameters
-                params.require(:movie).permit(:title,:rating,:image,:date_of_creation,:genre_id)
+                params.require(:movie).permit(:title,:rating,:image,:date_of_creation,:genre_id,:order)
             end
 
             

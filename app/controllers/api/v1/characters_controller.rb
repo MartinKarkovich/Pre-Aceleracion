@@ -4,7 +4,7 @@ module Api
             before_action :authenticate_user!
             before_action :set_character, only: [:show,:destroy,:update]
             def index
-                @characters = Character.all
+                @characters ||= fetch_characters
                 render json: @characters,
                        each_serializer: CharacterSerializers::IndexCharacterSerializer
             end
@@ -39,6 +39,33 @@ module Api
             end
 
             private
+
+            def fetch_characters
+                characters = Character.all
+                characters = characters.for_name(name) if name
+                characters = characters.for_weight(weight) if weight
+                characters = characters.for_movie_id(movie_id) if movie_id
+                characters = characters.for_age(age) if age
+                characters
+            end
+            
+            ## Filtros
+            def name
+                params[:name]
+            end
+            
+            def weight
+                params[:weight]
+            end
+
+            def movie_id
+                params[:movie_id]
+            end
+
+            def age
+                params[:age]
+            end
+            ######################
             
             def set_character
                 @character = Character.find(params[:id])
@@ -47,6 +74,9 @@ module Api
             def parameters
                 params.require(:character).permit(:name,:age,:weight,:image,:history,:movie_id)
             end
+
+
+
 
             
         end

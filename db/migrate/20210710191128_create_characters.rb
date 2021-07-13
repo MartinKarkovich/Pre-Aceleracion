@@ -5,7 +5,7 @@ class CreateCharacters < ActiveRecord::Migration[6.1]
       t.string :image
       t.string :name
       t.integer :age
-      t.decimal :weight
+      t.decimal :weight, precision: 10, scale: 2
       t.text :history
 
       t.timestamps

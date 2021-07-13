@@ -9,9 +9,6 @@ gem 'devise_token_auth'
 # JSON serializer
 gem 'active_model_serializers'
 
-# Environment variables
-gem 'dotenv'
-
 gem 'rails', '~> 6.1.4'
 
 gem 'mysql2', '~> 0.5'
@@ -23,8 +20,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 
 group :development, :test do
-  gem 'faker'
-  
+  gem 'faker'  
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 

@@ -1,13 +1,24 @@
 require 'faker'
+
+LIST_OF_GENRES = ["Action","Comedy","Drama","Fantasy","Horror","Mystery","Romance","Thriller"]
+
+def choose_random_genre_name
+    LIST_OF_GENRES.delete_at(rand(LIST_OF_GENRES.length))   
+end
+
+def random_date_in_year(year)
+    return rand(Date.civil(year.min, 1, 1)..Date.civil(year.max, 12, 31)) if year.kind_of?(Range)
+    rand(Date.civil(year, 1, 1)..Date.civil(year, 12, 31))
+  end
+
 # Genres
 5.times do |i|
     Genre.create!(
-        :name => "name",
+        :name => choose_random_genre_name,
         :image => "image"
     )
 
 end
-
 
 # Movies
 5.times do |i|
@@ -15,12 +26,11 @@ end
         :image => "image",
         :title => Faker::Movie.unique.title,
         :rating => rand(1..5).to_f,
-        :date_of_creation => Date.today,
+        :date_of_creation => random_date_in_year(1950..2020),
         :genre_id => i+1
     )
 
 end
-
 
 # Characters
 5.times do |i|
@@ -36,19 +46,5 @@ end
 
     end
 end
-
-# private
-
-# LIST_OF_GENRES = ["Action","Comedy","Drama","Fantasy","Horror","Mystery","Romance","Thriller"]
-
-# def choose_random_genre_name
-#     LIST_OF_GENRES.delete_at(rand(LIST_OF_GENRES.length))   
-# end
-
-# def random_date_in_year(year)
-#     return rand(Date.civil(year.min, 1, 1)..Date.civil(year.max, 12, 31)) if year.kind_of?(Range)
-#     rand(Date.civil(year, 1, 1)..Date.civil(year, 12, 31))
-#   end
-
 
 

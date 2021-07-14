@@ -5,7 +5,7 @@ class CreateMovies < ActiveRecord::Migration[6.1]
       t.string :image
       t.string :title
       t.date :date_of_creation
-      t.decimal :rating, precision: 10, scale: 2
+      t.decimal :rating, precision: 10, scale: 1
 
       t.timestamps
     end
